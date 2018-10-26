@@ -51,7 +51,7 @@ namespace StoreGraphRenderer.Controllers
             return View();
         }
 
-        public ActionResult SelectCluster(string ClusterGroupSelected)
+        public ActionResult SelectCluster(string StoreSelectedID, string StoreSelectedFloor, string ClusterGroupSelected)
         {
             List<string> clusterGroupToNameList = new List<string>();
 
@@ -62,11 +62,13 @@ namespace StoreGraphRenderer.Controllers
                 }
             }
 
+            ViewBag.StoreSelectedID = StoreSelectedID;
+            ViewBag.StoreSelectedFloor = StoreSelectedFloor;
             ViewBag.ListOfClusterNames = clusterGroupToNameList;
             return View();
         }
 
-        public ActionResult RenderButtons(int StoreID, string ClusterGroupSelected, string ClusterNameSelected)
+        public ActionResult RenderButtons(int StoreSelectedID, string StoreSelectedFloor, string ClusterGroupSelected, string ClusterNameSelected)
         {
             
             return View();

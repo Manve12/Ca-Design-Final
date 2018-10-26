@@ -4,3 +4,11 @@
     ViewBag.Title = "SelectFloor";
 }
 
+@using (Html.BeginForm("SelectCluster", "Home"))
+    {
+        <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+        <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
+        @Html.DropDownListFor(group => group.ClusterGroupSelected, new SelectList(ViewBag.ListOfClusterGroup));
+        <input type="submit" value="Select Region" />
+    }

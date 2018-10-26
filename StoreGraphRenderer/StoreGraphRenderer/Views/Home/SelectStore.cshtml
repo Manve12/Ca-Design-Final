@@ -11,9 +11,3 @@
     @Html.DropDownListFor(floor => floor.StoreSelectedFloor, new SelectList(ViewBag.StoreFloors));
     <input type="submit" value="Select" />
 }
-
-@*@using (Html.BeginForm("SelectCluster", "Home"))
-{
-    @Html.DropDownListFor(group => group.ClusterGroupSelected, new SelectList(ViewBag.ListOfClusterGroup));
-    <input type="submit" value="Select Region" />
-}*@
