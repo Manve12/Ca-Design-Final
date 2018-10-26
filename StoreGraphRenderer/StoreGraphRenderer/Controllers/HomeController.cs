@@ -18,7 +18,19 @@ namespace StoreGraphRenderer.Controllers
             //                           {
             //                               { "@SelectedRegion", "3" }
             //                           });
-            int t = (int)Clusters.ClusterGroup.Location;
+
+            ViewBag.ListOfClusterGroup = Enum.GetValues(typeof(Clusters.ClusterGroup))
+                                         .Cast<Clusters.ClusterGroup>()
+                                         .Select(enu => enu.ToString())
+                                         .ToList();
+
+            //ViewBag.ListOfClusterNames = Clusters.ClusterName.Select(name => name.Value).ToList();
+            return View();
+        }
+
+        public ActionResult SelectCluster(string ClusterGroupSelected)
+        {
+
             return View();
         }
     }
