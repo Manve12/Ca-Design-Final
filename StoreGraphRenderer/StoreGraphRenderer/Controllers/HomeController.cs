@@ -70,7 +70,9 @@ namespace StoreGraphRenderer.Controllers
 
         public ActionResult RenderButtons(int StoreSelectedID, string StoreSelectedFloor, string ClusterGroupSelected, string ClusterNameSelected)
         {
-            
+            ViewBag.StoreSelectedID = StoreSelectedID;
+            ViewBag.StoreSelectedFloor = StoreSelectedFloor;
+
             return View();
         }
     }
