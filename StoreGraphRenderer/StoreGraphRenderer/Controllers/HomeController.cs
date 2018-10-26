@@ -19,11 +19,35 @@ namespace StoreGraphRenderer.Controllers
             //                               { "@SelectedRegion", "3" }
             //                           });
 
+            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetStoreIDs, new Dictionary<string, string>(){});
+
+            ViewBag.StoreIDs = table.Select().Select(r => r.ItemArray[0].ToString()).ToList();
+
+            return View();
+        }
+
+        public ActionResult SelectStore(string StoreSelectedID, string StoreSelectedFloor)
+        {
+            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetStoreFloors, 
+                                                        new Dictionary<string, string>()
+                                                        {
+                                                            { "@StoreID", StoreSelectedID }
+                                                        });
+            ViewBag.StoreSelectedID = StoreSelectedID;
+            ViewBag.StoreSelectedFloor = StoreSelectedFloor;
+            ViewBag.StoreFloors = table.Select().Select(r => r.ItemArray[0].ToString()).ToList();
+
+            return View();
+        }
+
+        public ActionResult SelectFloor(string StoreSelectedID, string StoreSelectedFloor, string ClusterGroupSelected)
+        {
+            ViewBag.StoreSelectedID = StoreSelectedID;
+            ViewBag.StoreSelectedFloor = StoreSelectedFloor;
             ViewBag.ListOfClusterGroup = Enum.GetValues(typeof(Clusters.ClusterGroup))
                                          .Cast<Clusters.ClusterGroup>()
                                          .Select(enu => enu.ToString())
                                          .ToList();
-           
             return View();
         }
 

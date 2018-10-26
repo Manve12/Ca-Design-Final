@@ -1,10 +1,7 @@
 ﻿using StoreGraphRenderer.Data;
 using StoreGraphRenderer.Enums;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace StoreGraphRenderer.Controllers
@@ -25,7 +22,7 @@ namespace StoreGraphRenderer.Controllers
                 }
             }
 
-            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetRegionLocationSize,
+            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalSales,
                                        new Dictionary<string, string>()
                                        {
                                            { "@StoreID", StoreID.ToString() },

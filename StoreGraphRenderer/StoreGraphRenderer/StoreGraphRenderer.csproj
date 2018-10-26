@@ -166,6 +166,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ClusterSelection.cs" />
+    <Compile Include="Models\StoreSelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +210,8 @@
     <Content Include="Views\Home\SelectCluster.cshtml" />
     <Content Include="Views\Home\RenderButtons.cshtml" />
     <Content Include="Views\Graph\RenderGraph.cshtml" />
+    <Content Include="Views\Home\SelectStore.cshtml" />
+    <Content Include="Views\Home\SelectFloor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

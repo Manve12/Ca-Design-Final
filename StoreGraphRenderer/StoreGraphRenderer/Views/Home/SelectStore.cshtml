@@ -1,0 +1,19 @@
+﻿@model StoreGraphRenderer.Models.StoreSelection
+
+@{
+    ViewBag.Title = "SelectStore";
+}
+
+
+@using (Html.BeginForm("SelectFloor", "Home"))
+{
+    @Html.HiddenFor(id => id.StoreSelectedID);
+    @Html.DropDownListFor(floor => floor.StoreSelectedFloor, new SelectList(ViewBag.StoreFloors));
+    <input type="submit" value="Select" />
+}
+
+@*@using (Html.BeginForm("SelectCluster", "Home"))
+{
+    @Html.DropDownListFor(group => group.ClusterGroupSelected, new SelectList(ViewBag.ListOfClusterGroup));
+    <input type="submit" value="Select Region" />
+}*@

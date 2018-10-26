@@ -1,11 +1,11 @@
-﻿@model StoreGraphRenderer.Models.ClusterSelection
+﻿@model StoreGraphRenderer.Models.StoreSelection
 
 @{
     ViewBag.Title = "Home Page";
 }
 
-@using (Html.BeginForm("SelectCluster","Home"))
+@using (Html.BeginForm("SelectStore", "Home"))
 {
-    @Html.DropDownListFor(group => group.ClusterGroupSelected, new SelectList(ViewBag.ListOfClusterGroup));
-    <input type="submit" value="Select Region"/>
+    @Html.DropDownListFor(store => store.StoreSelectedID, new SelectList(ViewBag.StoreIDs));
+    <input type="submit" value="Select Store" />
 }
