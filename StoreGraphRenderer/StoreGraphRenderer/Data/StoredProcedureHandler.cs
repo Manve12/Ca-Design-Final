@@ -12,7 +12,7 @@ namespace StoreGraphRenderer.Data
 {
     public class StoredProcedureHandler
     {
-        public DataTable Get(StoredProcedures.Procedure procedure, Dictionary<string,string> parametersWithValue)
+        public static DataTable Get(StoredProcedures.Procedure procedure, Dictionary<string,string> parametersWithValue)
         {
             string procedureName = "";
 
