@@ -4,8 +4,9 @@
     ViewBag.Title = "SelectCluster";
 }
 
-@using (Html.BeginForm("Index", "Home"))
+@using (Html.BeginForm("RenderButtons", "Home"))
 {
+    @Html.HiddenFor(group => group.ClusterGroupSelected);
     @Html.DropDownListFor(name => name.ClusterNameSelected, new SelectList(ViewBag.ListOfClusterNames));
-    <input type="submit" value="Select Region" />
+    <input type="submit" value="Select" />
 }

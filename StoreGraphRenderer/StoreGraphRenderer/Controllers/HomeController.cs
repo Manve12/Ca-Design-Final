@@ -42,5 +42,11 @@ namespace StoreGraphRenderer.Controllers
             ViewBag.ListOfClusterNames = clusterGroupToNameList;
             return View();
         }
+
+        public ActionResult RenderButtons(string ClusterGroupSelected, string ClusterNameSelected)
+        {
+
+            return View();
+        }
     }
 }
