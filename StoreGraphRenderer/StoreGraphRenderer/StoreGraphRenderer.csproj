@@ -157,7 +157,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StoredProcedureController.cs" />
+    <Compile Include="Data\StoredProcedureHandler.cs" />
     <Compile Include="Data\DbConnect.cs" />
     <Compile Include="Enums\StoredProcedures.cs" />
     <Compile Include="Global.asax.cs">

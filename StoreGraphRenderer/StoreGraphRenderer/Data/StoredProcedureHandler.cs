@@ -8,9 +8,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace StoreGraphRenderer.Controllers
+namespace StoreGraphRenderer.Data
 {
-    public class StoredProcedureController : Controller
+    public class StoredProcedureHandler
     {
         public DataTable Get(StoredProcedures.Procedure procedure, Dictionary<string,string> parametersWithValue)
         {

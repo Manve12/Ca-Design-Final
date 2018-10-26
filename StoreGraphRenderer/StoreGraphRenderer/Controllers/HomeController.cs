@@ -10,6 +10,7 @@ namespace StoreGraphRenderer.Controllers
     {
         public ActionResult Index()
         {
+            
             return View();
         }
     }
