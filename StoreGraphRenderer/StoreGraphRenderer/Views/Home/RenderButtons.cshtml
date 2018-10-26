@@ -1,8 +1,12 @@
-﻿@{
+﻿@model StoreGraphRenderer.Models.ClusterSelection
+
+@{
     ViewBag.Title = "RenderButtons";
 }
 
 @using (Html.BeginForm("GetTotalSales", "Graph"))
 {
+    @Html.HiddenFor(group => group.ClusterGroupSelected);
+    @Html.HiddenFor(name => name.ClusterNameSelected);
     <input type="submit" value="Get total sales"/>
 }

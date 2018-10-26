@@ -23,8 +23,7 @@ namespace StoreGraphRenderer.Controllers
                                          .Cast<Clusters.ClusterGroup>()
                                          .Select(enu => enu.ToString())
                                          .ToList();
-
-            //ViewBag.ListOfClusterNames = Clusters.ClusterName.Select(name => name.Value).ToList();
+           
             return View();
         }
 
@@ -43,9 +42,9 @@ namespace StoreGraphRenderer.Controllers
             return View();
         }
 
-        public ActionResult RenderButtons(string ClusterGroupSelected, string ClusterNameSelected)
+        public ActionResult RenderButtons(int StoreID, string ClusterGroupSelected, string ClusterNameSelected)
         {
-
+            
             return View();
         }
     }
