@@ -13,12 +13,6 @@ namespace StoreGraphRenderer.Controllers
     {
         public ActionResult Index()
         {
-            //DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetRegionLocationSize, 
-            //                           new Dictionary<string, string>()
-            //                           {
-            //                               { "@SelectedRegion", "3" }
-            //                           });
-
             DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetStoreIDs, new Dictionary<string, string>(){});
 
             ViewBag.StoreIDs = table.Select().Select(r => r.ItemArray[0].ToString()).ToList();

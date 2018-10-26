@@ -9,12 +9,12 @@ namespace StoreGraphRenderer.Controllers
     public class GraphController : Controller
     {
         // GET: Graph
-        public ActionResult RenderGraph(int StoreID, string ClusterGroupSelected, string ClusterNameSelected, string FloorName)
+        public ActionResult GetTotalSales(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
         {
             //convert cluster name to id
             int clusterID = 0;
 
-            foreach (var item in Clusters.ClusterName)
+            foreach (var item in Clusters.ClusterId)
             {
                 if (item.Key.ToString() == ClusterNameSelected)
                 {
@@ -25,11 +25,23 @@ namespace StoreGraphRenderer.Controllers
             DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalSales,
                                        new Dictionary<string, string>()
                                        {
-                                           { "@StoreID", StoreID.ToString() },
+                                           { "@StoreID", StoreSelectedID.ToString() },
                                            { "@ClusterID", clusterID.ToString() },
-                                           { "@FloorName", FloorName }
+                                           { "@FloorName", StoreSelectedFloor }
                                        });
-            return View();
+
+            var newChart = GraphRender.RenderGraph(model);
+
+            string imageBase64Data = Convert.ToBase64String(newChart);
+            string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+            if (imageDataURL.Length > 0)
+            {
+                ViewBag.ImageUrl = imageDataURL;
+            }
+
+         
+
+            return View("~/Views/Graph/RenderGraph.cshtml");
         }
     }
 }
