@@ -156,6 +156,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GraphController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\StoredProcedureHandler.cs" />
     <Compile Include="Data\DbConnect.cs" />
@@ -207,6 +208,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\SelectCluster.cshtml" />
     <Content Include="Views\Home\RenderButtons.cshtml" />
+    <Content Include="Views\Graph\RenderGraph.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

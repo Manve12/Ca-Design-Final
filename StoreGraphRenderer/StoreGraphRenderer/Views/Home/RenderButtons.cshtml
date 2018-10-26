@@ -1,5 +1,8 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "RenderButtons";
 }
 
+@using (Html.BeginForm("GetTotalSales", "Graph"))
+{
+    <input type="submit" value="Get total sales"/>
+}
