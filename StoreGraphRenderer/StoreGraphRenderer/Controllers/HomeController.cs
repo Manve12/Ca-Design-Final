@@ -30,7 +30,16 @@ namespace StoreGraphRenderer.Controllers
 
         public ActionResult SelectCluster(string ClusterGroupSelected)
         {
+            List<string> clusterGroupToNameList = new List<string>();
 
+            foreach (var item in Clusters.ClusterName)
+            {
+                if (item.Value.ToString() == ClusterGroupSelected) {
+                    clusterGroupToNameList.Add(item.Key);
+                }
+            }
+
+            ViewBag.ListOfClusterNames = clusterGroupToNameList;
             return View();
         }
     }

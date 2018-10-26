@@ -14,21 +14,21 @@ namespace StoreGraphRenderer.Enums
             Size = 4
         }
 
-        public static Dictionary<ClusterGroup, string> ClusterName = new Dictionary<ClusterGroup, string>()
+        public static Dictionary<string, ClusterGroup> ClusterName = new Dictionary<string, ClusterGroup>()
         {
-            { ClusterGroup.Region, "North" },
-            { ClusterGroup.Region, "South" },
-            { ClusterGroup.Region, "East" },
-            { ClusterGroup.Region, "West" },
+            { "North", ClusterGroup.Region },
+            { "South", ClusterGroup.Region },
+            { "East", ClusterGroup.Region },
+            { "West", ClusterGroup.Region },
 
-            { ClusterGroup.Location, "High Street" },
-            { ClusterGroup.Location, "Retail Park" },
-            { ClusterGroup.Location, "Shopping Centre" },
+            { "High Street", ClusterGroup.Location },
+            { "Retail Park", ClusterGroup.Location },
+            { "Shopping Centre", ClusterGroup.Location },
 
-            { ClusterGroup.Size, "< 25000" },
-            { ClusterGroup.Size, "25000 - 50000" },
-            { ClusterGroup.Size, "50000 - 75000" },
-            { ClusterGroup.Size, "75000 +" }
+            { "< 25000", ClusterGroup.Size },
+            { "25000 - 50000", ClusterGroup.Size },
+            { "50000 - 75000", ClusterGroup.Size },
+            { "75000 +", ClusterGroup.Size }
         };
     }
 }

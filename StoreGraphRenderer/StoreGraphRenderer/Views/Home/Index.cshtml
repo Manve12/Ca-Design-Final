@@ -1,17 +1,11 @@
 ﻿@model StoreGraphRenderer.Models.ClusterSelection
 
-@using StoreGraphRenderer.Enums;
-
 @{
     ViewBag.Title = "Home Page";
 }
 
-@using (Html.BeginForm("Index","Home"))
+@using (Html.BeginForm("SelectCluster","Home"))
 {
-    var t = Enum.GetValues(typeof(Clusters.ClusterGroup));
-    
     @Html.DropDownListFor(group => group.ClusterGroupSelected, new SelectList(ViewBag.ListOfClusterGroup));
-
-    @*@Html.DropDownListFor(name => name.ClusterNameSelected, new SelectList(ViewBag.ListOfClusterNames));*@
-    <input type="submit" />
+    <input type="submit" value="Select Region"/>
 }

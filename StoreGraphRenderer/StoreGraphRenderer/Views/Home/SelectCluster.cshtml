@@ -1,0 +1,11 @@
+﻿@model StoreGraphRenderer.Models.ClusterSelection
+
+@{
+    ViewBag.Title = "SelectCluster";
+}
+
+@using (Html.BeginForm("Index", "Home"))
+{
+    @Html.DropDownListFor(name => name.ClusterNameSelected, new SelectList(ViewBag.ListOfClusterNames));
+    <input type="submit" value="Select Region" />
+}
