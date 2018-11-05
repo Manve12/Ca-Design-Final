@@ -159,6 +159,7 @@
     <Compile Include="Controllers\GraphController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\GraphRenderer.cs" />
+    <Compile Include="Data\GraphTemplate.cs" />
     <Compile Include="Data\StoredProcedureHandler.cs" />
     <Compile Include="Data\DbConnect.cs" />
     <Compile Include="Enums\Clusters.cs" />
@@ -167,6 +168,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ClusterSelection.cs" />
+    <Compile Include="Models\GraphModel.cs" />
     <Compile Include="Models\StoreSelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

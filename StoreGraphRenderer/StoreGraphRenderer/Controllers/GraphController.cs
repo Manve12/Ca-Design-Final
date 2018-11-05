@@ -1,5 +1,7 @@
 ﻿using StoreGraphRenderer.Data;
 using StoreGraphRenderer.Enums;
+using StoreGraphRenderer.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Web.Mvc;
@@ -30,17 +32,44 @@ namespace StoreGraphRenderer.Controllers
                                            { "@FloorName", StoreSelectedFloor }
                                        });
 
-            var newChart = GraphRender.RenderGraph(model);
+            List<string> xData = new List<string>();
+            List<string> yData = new List<string>();
 
-            string imageBase64Data = Convert.ToBase64String(newChart);
+            List<string> xDataAdditional = new List<string>();
+            List<string> yDataAdditional = new List<string>();
+
+            foreach (DataRow item in table.Rows)
+            {
+                xData.Add(item.ItemArray[0].ToString());
+                yData.Add(item.ItemArray[1].ToString());
+                xDataAdditional.Add(item.ItemArray[2].ToString());
+                yDataAdditional.Add(item.ItemArray[3].ToString());
+            }
+
+            GraphModel model = new GraphModel();
+            model.YAxisData = xData.ToArray();
+            model.XAxisData = yData.ToArray();
+
+            model.YAxisDataAdditional = xDataAdditional.ToArray();
+            
+            model.XAxisTitle = "Week counter";
+            model.YAxisTitle = "Total Sales";
+            model.Title = "Total Sales/Week counter";
+            model.GraphType = "line";
+            model.GraphTemplate = GraphTemplate.graphTemplateInterval1000WithX50;
+            model.Width = 1200;
+            model.Height = 1200;
+            model.SeriesTitleInitial = "Weeks 13";
+            model.SeriesTitleAdditional = "Weeks 52";
+            var weeks13Chart = GraphRenderer.RenderGraph(model);
+
+            string imageBase64Data = Convert.ToBase64String(weeks13Chart);
             string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
             if (imageDataURL.Length > 0)
             {
                 ViewBag.ImageUrl = imageDataURL;
             }
-
-         
-
+            
             return View("~/Views/Graph/RenderGraph.cshtml");
         }
     }
