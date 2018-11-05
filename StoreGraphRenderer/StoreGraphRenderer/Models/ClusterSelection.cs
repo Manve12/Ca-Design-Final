@@ -9,5 +9,7 @@ namespace StoreGraphRenderer.Models
     {
         public string ClusterGroupSelected { get; set; }
         public string ClusterNameSelected { get; set; }
+
+        public string SelectedBay { get; set; }
     }
 }

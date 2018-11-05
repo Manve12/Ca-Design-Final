@@ -66,7 +66,36 @@ namespace StoreGraphRenderer.Controllers
         {
             ViewBag.StoreSelectedID = StoreSelectedID;
             ViewBag.StoreSelectedFloor = StoreSelectedFloor;
+            
+            //convert cluster name to id
+            int clusterID = 0;
 
+            foreach (var item in Clusters.ClusterId)
+            {
+                if (item.Key.ToString() == ClusterNameSelected)
+                {
+                    clusterID = (int)item.Value;
+                }
+            }
+
+            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetBay,
+                                                       new Dictionary<string, string>()
+                                                       {
+                                                            { "@StoreID", StoreSelectedID.ToString() },
+                                                            { "@FloorName", StoreSelectedFloor },
+                                                            { "@ClusterID", clusterID.ToString() },
+                                                       });
+            
+            ViewBag.StoreBay = table.Select().Select(r => r.ItemArray[0].ToString()).ToList();
+
+            return View();
+        }
+
+        public ActionResult SelectBay(int StoreSelectedID, string StoreSelectedFloor, string ClusterGroupSelected, string ClusterNameSelected, string SelectedBay)
+        {
+            ViewBag.StoreSelectedID = StoreSelectedID;
+            ViewBag.StoreSelectedFloor = StoreSelectedFloor;
+            
             return View();
         }
     }

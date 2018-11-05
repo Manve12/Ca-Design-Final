@@ -215,6 +215,7 @@
     <Content Include="Views\Graph\RenderGraph.cshtml" />
     <Content Include="Views\Home\SelectStore.cshtml" />
     <Content Include="Views\Home\SelectFloor.cshtml" />
+    <Content Include="Views\Home\SelectBay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
