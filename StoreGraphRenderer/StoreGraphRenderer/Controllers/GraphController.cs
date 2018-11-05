@@ -10,8 +10,7 @@ namespace StoreGraphRenderer.Controllers
 {
     public class GraphController : Controller
     {
-        // GET: Graph Total Sales
-        public ActionResult GetTotalSales(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
+        private int GetClusterID(string ClusterNameSelected)
         {
             //convert cluster name to id
             int clusterID = 0;
@@ -23,12 +22,17 @@ namespace StoreGraphRenderer.Controllers
                     clusterID = (int)item.Value;
                 }
             }
+            return clusterID;
+        }
 
+        // GET: Graph Total Sales
+        public ActionResult GetTotalSales(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
+        {
             DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalSales,
                                        new Dictionary<string, string>()
                                        {
                                            { "@StoreID", StoreSelectedID.ToString() },
-                                           { "@ClusterID", clusterID.ToString() },
+                                           { "@ClusterID", GetClusterID(ClusterNameSelected).ToString() },
                                            { "@FloorName", StoreSelectedFloor }
                                        });
 
@@ -76,22 +80,11 @@ namespace StoreGraphRenderer.Controllers
         // GET: Graph Total Volume
         public ActionResult GetTotalVolume(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
         {
-            //convert cluster name to id
-            int clusterID = 0;
-
-            foreach (var item in Clusters.ClusterId)
-            {
-                if (item.Key.ToString() == ClusterNameSelected)
-                {
-                    clusterID = (int)item.Value;
-                }
-            }
-
             DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalVolume,
                                        new Dictionary<string, string>()
                                        {
                                            { "@StoreID", StoreSelectedID.ToString() },
-                                           { "@ClusterID", clusterID.ToString() },
+                                           { "@ClusterID", GetClusterID(ClusterNameSelected).ToString() },
                                            { "@FloorName", StoreSelectedFloor }
                                        });
 
@@ -133,6 +126,25 @@ namespace StoreGraphRenderer.Controllers
                 ViewBag.ImageUrl = imageDataURL;
             }
 
+            return View("~/Views/Graph/RenderGraph.cshtml");
+        }
+
+        // GET: Graph Bay Sales
+        public ActionResult GetBaySales(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
+        {
+
+            return View("~/Views/Graph/RenderGraph.cshtml");
+        }
+
+        // GET: Graph Bay Volume
+        public ActionResult GetBayVolume(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
+        {
+            return View("~/Views/Graph/RenderGraph.cshtml");
+        }
+
+        // GET: Graph Bay Average Sales
+        public ActionResult GetBayAverageSales(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
+        {
             return View("~/Views/Graph/RenderGraph.cshtml");
         }
     }

@@ -4,13 +4,6 @@
     ViewBag.Title = "SelectBay";
 }
 
-@{ 
-
-//get bay sales
-//get bay volume
-//get bay average sales
-}
-
 @using (Html.BeginForm("GetBaySales", "Graph"))
 {
     <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
