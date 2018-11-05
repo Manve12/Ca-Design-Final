@@ -14,6 +14,7 @@ namespace StoreGraphRenderer.Enums
             sp_GetRegionLocationSize,
             sp_GetTotalSales,
             sp_GetTotalVolume,
+            sp_GetBay
         }
 
         public static Dictionary<Procedure, string> StoredProcedure = new Dictionary<Procedure, string>
@@ -23,6 +24,7 @@ namespace StoreGraphRenderer.Enums
             { Procedure.sp_GetRegionLocationSize,"sp_GetRegionLocationSize" },
             { Procedure.sp_GetTotalSales,"sp_GetTotalSales" },
             { Procedure.sp_GetTotalVolume,"sp_GetTotalVolume" },
+            { Procedure.sp_GetBay,"sp_GetBay" },
         };
     }
 }
