@@ -1,5 +1,42 @@
-﻿
+﻿@model StoreGraphRenderer.Models.ClusterSelection
+
 @{
     ViewBag.Title = "SelectBay";
 }
 
+@{ 
+
+//get bay sales
+//get bay volume
+//get bay average sales
+}
+
+@using (Html.BeginForm("GetBaySales", "Graph"))
+{
+    <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+    <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
+    @Html.HiddenFor(cGroup => cGroup.ClusterGroupSelected);
+    @Html.HiddenFor(cName => cName.ClusterNameSelected);
+    @Html.HiddenFor(cBay => cBay.SelectedBay);
+
+    <input type="submit" value="Get Bay Sales"/>
+}
+
+@using (Html.BeginForm("GetBayVolume", "Graph"))
+{
+    @Html.HiddenFor(cGroup => cGroup.ClusterGroupSelected);
+    @Html.HiddenFor(cName => cName.ClusterNameSelected);
+    @Html.HiddenFor(cBay => cBay.SelectedBay);
+
+    <input type="submit" value="Get Bay Volume" />
+}
+
+@using (Html.BeginForm("GetBayAverageSales", "Graph"))
+{
+    @Html.HiddenFor(cGroup => cGroup.ClusterGroupSelected);
+    @Html.HiddenFor(cName => cName.ClusterNameSelected);
+    @Html.HiddenFor(cBay => cBay.SelectedBay);
+    
+    <input type="submit" value="Get Bay Average Sales" />
+}
