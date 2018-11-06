@@ -314,5 +314,165 @@ namespace StoreGraphRenderer.Controllers
 
             return View("~/Views/Graph/RenderGraph.cshtml");
         }
+
+
+        // GET: Graph Bay Total Sales / Volume - pie
+        public ActionResult GetTotalVolumeSalesPerBay(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
+        {
+            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalVolumeSalesPerBay,
+                                      new Dictionary<string, string>()
+                                      {
+                                           { "@StoreID", StoreSelectedID.ToString() },
+                                           { "@ClusterID", GetClusterID(ClusterNameSelected).ToString() },
+                                           { "@FloorName", StoreSelectedFloor },
+                                           { "@Bay", SelectedBay}
+                                      });
+
+            var tableEnumerable = table.AsEnumerable();
+
+            var arr1 = tableEnumerable.Select(s => s.Field<string>("TotalSalesWeeks13")).ToList().ToArray();
+            var arr2 = tableEnumerable.Select(s => s.Field<string>("TotalVolumeWeeks13")).ToList().ToArray();
+
+            var arr = arr1.Concat(arr2).ToArray();
+
+            GraphModel model = new GraphModel();
+            model.YAxisData = arr;
+            model.GraphType = "pie";
+            
+            
+            model.GraphTemplate = GraphTemplate.graphTemplateInterval10;
+
+            model.SeriesTitleInitial = "Weeks 13";
+            model.SeriesTitleAdditional = "Weeks 52";
+            var chart = GraphRenderer.RenderGraph(model);
+
+            string imageData = ImageToBase64.Get(chart);
+            if (imageData.Length > 0)
+            {
+                ViewBag.ImageUrl = imageData;
+            }
+
+            return View("~/Views/Graph/RenderGraph.cshtml");
+        }
+
+        // GET: Graph Bay Total Sales / Volume - pie
+        public ActionResult GetTotalSalesProfitPerBay(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
+        {
+            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalSalesProfitPerBay,
+                                      new Dictionary<string, string>()
+                                      {
+                                           { "@StoreID", StoreSelectedID.ToString() },
+                                           { "@ClusterID", GetClusterID(ClusterNameSelected).ToString() },
+                                           { "@FloorName", StoreSelectedFloor },
+                                           { "@Bay", SelectedBay}
+                                      });
+
+            var tableEnumerable = table.AsEnumerable();
+
+            var arr1 = tableEnumerable.Select(s => s.Field<string>("TotalSalesWeeks13")).ToList().ToArray();
+            var arr2 = tableEnumerable.Select(s => s.Field<string>("AverageProfitWeeks13")).ToList().ToArray();
+
+            var arr = arr1.Concat(arr2).ToArray();
+
+            GraphModel model = new GraphModel();
+            model.YAxisData = arr;
+            model.GraphType = "pie";
+
+
+            model.GraphTemplate = GraphTemplate.graphTemplateInterval10;
+
+            model.SeriesTitleInitial = "Weeks 13";
+            model.SeriesTitleAdditional = "Weeks 52";
+            var chart = GraphRenderer.RenderGraph(model);
+
+            string imageData = ImageToBase64.Get(chart);
+            if (imageData.Length > 0)
+            {
+                ViewBag.ImageUrl = imageData;
+            }
+
+            return View("~/Views/Graph/RenderGraph.cshtml");
+        }
+
+        // GET: Graph Bay Total Volume / Profit - pie
+        public ActionResult GetTotalVolumeProfitPerBay(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
+        {
+            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalVolumeProfitPerBay,
+                                      new Dictionary<string, string>()
+                                      {
+                                           { "@StoreID", StoreSelectedID.ToString() },
+                                           { "@ClusterID", GetClusterID(ClusterNameSelected).ToString() },
+                                           { "@FloorName", StoreSelectedFloor },
+                                           { "@Bay", SelectedBay}
+                                      });
+
+            var tableEnumerable = table.AsEnumerable();
+
+            var arr1 = tableEnumerable.Select(s => s.Field<string>("TotalVolumeWeeks13")).ToList().ToArray();
+            var arr2 = tableEnumerable.Select(s => s.Field<string>("AverageProfitWeeks13")).ToList().ToArray();
+
+            var arr = arr1.Concat(arr2).ToArray();
+
+            GraphModel model = new GraphModel();
+            model.YAxisData = arr;
+            model.GraphType = "pie";
+
+
+            model.GraphTemplate = GraphTemplate.graphTemplateInterval10;
+
+            model.SeriesTitleInitial = "Weeks 13";
+            model.SeriesTitleAdditional = "Weeks 52";
+            var chart = GraphRenderer.RenderGraph(model);
+
+            string imageData = ImageToBase64.Get(chart);
+            if (imageData.Length > 0)
+            {
+                ViewBag.ImageUrl = imageData;
+            }
+
+            return View("~/Views/Graph/RenderGraph.cshtml");
+        }
+
+        // GET: Graph Bay Total Sales / Volume / Profit - pie
+        public ActionResult GetTotalSalesVolumeProfitPerBay(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
+        {
+            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalSalesVolumeProfitPerBay,
+                                      new Dictionary<string, string>()
+                                      {
+                                           { "@StoreID", StoreSelectedID.ToString() },
+                                           { "@ClusterID", GetClusterID(ClusterNameSelected).ToString() },
+                                           { "@FloorName", StoreSelectedFloor },
+                                           { "@Bay", SelectedBay}
+                                      });
+
+            var tableEnumerable = table.AsEnumerable();
+
+            var arr1 = tableEnumerable.Select(s => s.Field<string>("TotalSalesWeeks13")).ToList().ToArray();
+            var arr2 = tableEnumerable.Select(s => s.Field<string>("TotalVolumeWeeks13")).ToList().ToArray();
+            var arr3 = tableEnumerable.Select(s => s.Field<string>("AverageProfitWeeks13")).ToList().ToArray();
+
+            var arr = arr1.Concat(arr2).ToArray();
+            arr = arr.Concat(arr3).ToArray();
+
+            GraphModel model = new GraphModel();
+            model.YAxisData = arr;
+            model.GraphType = "pie";
+
+
+            model.GraphTemplate = GraphTemplate.graphTemplateInterval10;
+
+            model.SeriesTitleInitial = "Weeks 13";
+            model.SeriesTitleAdditional = "Weeks 52";
+            var chart = GraphRenderer.RenderGraph(model);
+
+            string imageData = ImageToBase64.Get(chart);
+            if (imageData.Length > 0)
+            {
+                ViewBag.ImageUrl = imageData;
+            }
+
+            return View("~/Views/Graph/RenderGraph.cshtml");
+        }
+
     }
 }

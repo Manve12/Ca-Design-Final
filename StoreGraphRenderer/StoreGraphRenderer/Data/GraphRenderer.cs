@@ -54,19 +54,18 @@ namespace StoreGraphRenderer.Data
                 chartType: model.GraphType,
                 yValues: model.YAxisDataAdditional,
                 xValue: model.XAxisDataAdditional,
-
                 name: model.SeriesTitleAdditional
                 )
 
                .AddLegend();
-
             }
 
             if (model.XAxisData != null)
                 newChart.SetXAxis(min: 1, max: model.XAxisData.Length, title: model.XAxisTitle)
                               .SetYAxis(title: model.YAxisTitle);
+            
 
-
+           
             return newChart.GetBytes();
         }
     }

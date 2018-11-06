@@ -36,6 +36,58 @@
     @Html.HiddenFor(cGroup => cGroup.ClusterGroupSelected);
     @Html.HiddenFor(cName => cName.ClusterNameSelected);
     @Html.HiddenFor(cBay => cBay.SelectedBay);
-    
+
     <input type="submit" value="Get Bay Average Profit" />
+}
+
+@{ 
+    // some pie charts to come
+}
+
+@using (Html.BeginForm("GetTotalVolumeSalesPerBay", "Graph"))
+{
+    <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+    <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
+    @Html.HiddenFor(cGroup => cGroup.ClusterGroupSelected);
+    @Html.HiddenFor(cName => cName.ClusterNameSelected);
+    @Html.HiddenFor(cBay => cBay.SelectedBay);
+
+    <input type="submit" value="Get total volume/sales" />
+}
+
+@using (Html.BeginForm("GetTotalSalesProfitPerBay", "Graph"))
+{
+    <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+    <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
+    @Html.HiddenFor(cGroup => cGroup.ClusterGroupSelected);
+    @Html.HiddenFor(cName => cName.ClusterNameSelected);
+    @Html.HiddenFor(cBay => cBay.SelectedBay);
+
+    <input type="submit" value="Get total sales/profits" />
+}
+
+@using (Html.BeginForm("GetTotalVolumeProfitPerBay", "Graph"))
+{
+    <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+    <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
+    @Html.HiddenFor(cGroup => cGroup.ClusterGroupSelected);
+    @Html.HiddenFor(cName => cName.ClusterNameSelected);
+    @Html.HiddenFor(cBay => cBay.SelectedBay);
+
+    <input type="submit" value="Get total volume/profit" />
+}
+
+@using (Html.BeginForm("GetTotalSalesVolumeProfitPerBay", "Graph"))
+{
+    <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+    <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
+    @Html.HiddenFor(cGroup => cGroup.ClusterGroupSelected);
+    @Html.HiddenFor(cName => cName.ClusterNameSelected);
+    @Html.HiddenFor(cBay => cBay.SelectedBay);
+
+    <input type="submit" value="Get total sales,volume and profit" />
 }
