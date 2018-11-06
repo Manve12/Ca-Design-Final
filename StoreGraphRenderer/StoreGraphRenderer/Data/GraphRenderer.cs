@@ -65,7 +65,7 @@ namespace StoreGraphRenderer.Data
                               .SetYAxis(title: model.YAxisTitle);
             
 
-           
+            
             return newChart.GetBytes();
         }
     }

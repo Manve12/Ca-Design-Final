@@ -336,6 +336,7 @@ namespace StoreGraphRenderer.Controllers
             var arr = arr1.Concat(arr2).ToArray();
 
             GraphModel model = new GraphModel();
+            model.XAxisData = new string[] { "Total Sales", "Total Volume" };
             model.YAxisData = arr;
             model.GraphType = "pie";
             
@@ -375,6 +376,7 @@ namespace StoreGraphRenderer.Controllers
             var arr = arr1.Concat(arr2).ToArray();
 
             GraphModel model = new GraphModel();
+            model.XAxisData = new string[] { "Total Sales", "Average Profit" };
             model.YAxisData = arr;
             model.GraphType = "pie";
 
@@ -414,6 +416,7 @@ namespace StoreGraphRenderer.Controllers
             var arr = arr1.Concat(arr2).ToArray();
 
             GraphModel model = new GraphModel();
+            model.XAxisData = new string[] { "Total Volume", "Average Profit" };
             model.YAxisData = arr;
             model.GraphType = "pie";
 
@@ -455,15 +458,16 @@ namespace StoreGraphRenderer.Controllers
             arr = arr.Concat(arr3).ToArray();
 
             GraphModel model = new GraphModel();
+            model.XAxisData = new string[] { "Total Sales", "Total Volume", "Average Profit" };
             model.YAxisData = arr;
             model.GraphType = "pie";
-
-
+            
             model.GraphTemplate = GraphTemplate.graphTemplateInterval10;
 
             model.SeriesTitleInitial = "Weeks 13";
             model.SeriesTitleAdditional = "Weeks 52";
             var chart = GraphRenderer.RenderGraph(model);
+            
 
             string imageData = ImageToBase64.Get(chart);
             if (imageData.Length > 0)
