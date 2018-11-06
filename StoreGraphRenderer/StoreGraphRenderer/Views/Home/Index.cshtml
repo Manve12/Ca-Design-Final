@@ -4,6 +4,8 @@
     ViewBag.Title = "Home Page";
 }
 
+<p class="title">Select the store id which you would like to retrieve data for</p>
+
 @using (Html.BeginForm("SelectStore", "Home"))
 {
     @Html.DropDownListFor(store => store.StoreSelectedID, new SelectList(ViewBag.StoreIDs));
