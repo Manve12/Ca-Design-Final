@@ -4,6 +4,8 @@
     ViewBag.Title = "SelectCluster";
 }
 
+<p class="title">Select the compass location of the store</p>
+
 @using (Html.BeginForm("RenderButtons", "Home"))
 {
     <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />

@@ -4,6 +4,8 @@
     ViewBag.Title = "RenderButtons";
 }
 
+<p class="title">Render graphs for the selected store</p>
+
 @using (Html.BeginForm("GetTotalSales", "Graph"))
 {
     <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
@@ -64,7 +66,9 @@
     <input type="submit" value="Get Total Volume per bay" />
 }
 
-@using (Html.BeginForm("SelectBay", "Home"))
+<p class="title">Select store specific bay</p>
+
+@using (Html.BeginForm("SelectBay", "Home", FormMethod.Post, new { @class="select-bay"}))
 {
     <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
     <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
