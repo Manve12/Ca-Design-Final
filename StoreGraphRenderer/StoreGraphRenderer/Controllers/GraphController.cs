@@ -27,7 +27,7 @@ namespace StoreGraphRenderer.Controllers
             return clusterID;
         }
 
-        // GET: Graph Total Sales
+        // GET: Graph Total Sales - line 
         public ActionResult GetTotalSales(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
         {
             DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalSales,
@@ -76,7 +76,7 @@ namespace StoreGraphRenderer.Controllers
             return View("~/Views/Graph/RenderGraph.cshtml");
         }
 
-        // GET: Graph Total Volume
+        // GET: Graph Total Volume - line
         public ActionResult GetTotalVolume(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
         {
             DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalVolume,
@@ -125,10 +125,10 @@ namespace StoreGraphRenderer.Controllers
             return View("~/Views/Graph/RenderGraph.cshtml");
         }
 
-        // GET: Graph Total Volume
+        // GET: Graph Total Volume - line
         public ActionResult GetAverageProfit(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
         {
-            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalVolume,
+            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetAverageProfit,
                                        new Dictionary<string, string>()
                                        {
                                            { "@StoreID", StoreSelectedID.ToString() },
@@ -174,8 +174,51 @@ namespace StoreGraphRenderer.Controllers
             return View("~/Views/Graph/RenderGraph.cshtml");
         }
 
+        // GET: Graph Average Profit Per Bay - column
+        public ActionResult GetAverageProfitPerBay(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
+        {
+            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetAverageProfitPerBay,
+                                       new Dictionary<string, string>()
+                                       {
+                                           { "@StoreID", StoreSelectedID.ToString() },
+                                           { "@ClusterID", GetClusterID(ClusterNameSelected).ToString() },
+                                           { "@FloorName", StoreSelectedFloor }
+                                       });
 
-        // GET: Graph Bay Sales
+            List<string> xData = new List<string>(); // bay
+            List<string> yData = new List<string>(); // profit weeks 13
+            List<string> yDataAdditional = new List<string>(); // profit weeks 52
+            
+            foreach (DataRow item in table.Rows)
+            {
+                xData.Add(item.ItemArray[0].ToString());
+                yData.Add(item.ItemArray[1].ToString());
+                yDataAdditional.Add(item.ItemArray[2].ToString());
+            }
+
+            GraphModel model = new GraphModel();
+            model.YAxisData = yData.ToArray();
+            model.YAxisDataAdditional = yDataAdditional.ToArray();
+            model.XAxisData = xData.ToArray();
+           
+            model.XAxisTitle = "";
+            model.YAxisTitle = "";
+            model.Title = "";
+            model.GraphTemplate = GraphTemplate.graphTemplateInterval1000WithX50;
+            model.SeriesTitleInitial = "Weeks 13";
+            var chart = GraphRenderer.RenderGraph(model);
+
+            string imageData = ImageToBase64.Get(chart);
+            if (imageData.Length > 0)
+            {
+                ViewBag.ImageUrl = imageData;
+            }
+
+            return View("~/Views/Graph/RenderGraph.cshtml");
+        }
+
+
+        // GET: Graph Bay Sales - line
         public ActionResult GetBaySales(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
         {
             DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_BayGetSales,
@@ -214,7 +257,7 @@ namespace StoreGraphRenderer.Controllers
             return View("~/Views/Graph/RenderGraph.cshtml");
         }
    
-        // GET: Graph Bay Volume
+        // GET: Graph Bay Volume - line
         public ActionResult GetBayVolume(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
         {
             DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_BayGetVolume,
@@ -253,7 +296,7 @@ namespace StoreGraphRenderer.Controllers
             return View("~/Views/Graph/RenderGraph.cshtml");
         }
 
-        // GET: Graph Bay Average Sales
+        // GET: Graph Bay Average Sales - line
         public ActionResult GetBayAverageProfit(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
         {
             DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_BayGetProfits,

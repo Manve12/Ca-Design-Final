@@ -17,7 +17,11 @@ namespace StoreGraphRenderer.Enums
             sp_GetBay,
             sp_BayGetSales,
             sp_BayGetVolume,
-            sp_BayGetProfits
+            sp_BayGetProfits,
+            sp_GetAverageProfit,
+            sp_GetAverageProfitPerBay,
+            sp_GetTotalSalesPerBay,
+            sp_GetTotalVolumePerBay,
         }
 
         public static Dictionary<Procedure, string> StoredProcedure = new Dictionary<Procedure, string>
@@ -31,6 +35,10 @@ namespace StoreGraphRenderer.Enums
             { Procedure.sp_BayGetSales,"sp_BayGetSales" },
             { Procedure.sp_BayGetVolume,"sp_BayGetVolume" },
             { Procedure.sp_BayGetProfits,"sp_BayGetProfits" },
+            { Procedure.sp_GetAverageProfit,"sp_GetAverageProfit" },
+            { Procedure.sp_GetAverageProfitPerBay,"sp_GetAverageProfitPerBay" },
+            { Procedure.sp_GetTotalSalesPerBay,"sp_GetTotalSalesPerBay" },
+            { Procedure.sp_GetTotalVolumePerBay,"sp_GetTotalVolumePerBay" },
         };
     }
 }

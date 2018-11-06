@@ -34,6 +34,36 @@
     <input type="submit" value="Get average profit" />
 }
 
+@using (Html.BeginForm("GetAverageProfitPerBay", "Graph"))
+{
+    <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+    <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
+    @Html.HiddenFor(group => group.ClusterGroupSelected);
+    @Html.HiddenFor(name => name.ClusterNameSelected);
+    <input type="submit" value="Get average profit per bay" />
+}
+
+@using (Html.BeginForm("GetTotalSalesPerBay", "Graph"))
+{
+    <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+    <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
+    @Html.HiddenFor(group => group.ClusterGroupSelected);
+    @Html.HiddenFor(name => name.ClusterNameSelected);
+    <input type="submit" value="Get total sales per bay" />
+}
+
+@using (Html.BeginForm("GetTotalVolumePerBay", "Graph"))
+{
+    <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+    <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
+    @Html.HiddenFor(group => group.ClusterGroupSelected);
+    @Html.HiddenFor(name => name.ClusterNameSelected);
+    <input type="submit" value="Get Total Volume per bay" />
+}
+
 @using (Html.BeginForm("SelectBay", "Home"))
 {
     <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
