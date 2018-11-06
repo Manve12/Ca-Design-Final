@@ -67,15 +67,14 @@ namespace StoreGraphRenderer.Controllers
             model.Height = 1200;
             model.SeriesTitleInitial = "Weeks 13";
             model.SeriesTitleAdditional = "Weeks 52";
-            var weeks13Chart = GraphRenderer.RenderGraph(model);
+            var chart = GraphRenderer.RenderGraph(model);
 
-            string imageBase64Data = Convert.ToBase64String(weeks13Chart);
-            string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
-            if (imageDataURL.Length > 0)
+            string imageData = ImageToBase64.Get(chart);
+            if (imageData.Length > 0)
             {
-                ViewBag.ImageUrl = imageDataURL;
+                ViewBag.ImageUrl = imageData;
             }
-            
+
             return View("~/Views/Graph/RenderGraph.cshtml");
         }
 
@@ -119,13 +118,12 @@ namespace StoreGraphRenderer.Controllers
             model.Height = 1200;
             model.SeriesTitleInitial = "Weeks 13";
             model.SeriesTitleAdditional = "Weeks 52";
-            var weeks13Chart = GraphRenderer.RenderGraph(model);
+            var chart = GraphRenderer.RenderGraph(model);
 
-            string imageBase64Data = Convert.ToBase64String(weeks13Chart);
-            string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
-            if (imageDataURL.Length > 0)
+            string imageData = ImageToBase64.Get(chart);
+            if (imageData.Length > 0)
             {
-                ViewBag.ImageUrl = imageDataURL;
+                ViewBag.ImageUrl = imageData;
             }
 
             return View("~/Views/Graph/RenderGraph.cshtml");
@@ -171,13 +169,12 @@ namespace StoreGraphRenderer.Controllers
             model.Height = 1200;
             model.SeriesTitleInitial = "Weeks 13";
             model.SeriesTitleAdditional = "Weeks 52";
-            var weeks13Chart = GraphRenderer.RenderGraph(model);
+            var chart = GraphRenderer.RenderGraph(model);
 
-            string imageBase64Data = Convert.ToBase64String(weeks13Chart);
-            string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
-            if (imageDataURL.Length > 0)
+            string imageData = ImageToBase64.Get(chart);
+            if (imageData.Length > 0)
             {
-                ViewBag.ImageUrl = imageDataURL;
+                ViewBag.ImageUrl = imageData;
             }
 
             return View("~/Views/Graph/RenderGraph.cshtml");
