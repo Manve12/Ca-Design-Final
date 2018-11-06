@@ -27,10 +27,21 @@ namespace StoreGraphRenderer.Controllers
             return clusterID;
         }
 
-        // GET: Graph Total Sales - line 
-        public ActionResult GetTotalSales(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
+        private ActionResult DisplayGraph(
+            int StoreSelectedID, 
+            string ClusterGroupSelected, 
+            string ClusterNameSelected, 
+            string StoreSelectedFloor, 
+            StoredProcedures.Procedure procedure,
+            string modelTitle = "",
+            string modelGraphType = "column",
+            string modelXAxisTitle = "",
+            string modelYAxisTitle = "",
+            string modelSeriesTitle = "",
+            string modelSeriesAdditionalTitle = ""
+            )
         {
-            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalSales,
+            DataTable table = StoredProcedureHandler.Get(procedure,
                                        new Dictionary<string, string>()
                                        {
                                            { "@StoreID", StoreSelectedID.ToString() },
@@ -46,10 +57,14 @@ namespace StoreGraphRenderer.Controllers
 
             foreach (DataRow item in table.Rows)
             {
-                xData.Add(item.ItemArray[0].ToString());
-                yData.Add(item.ItemArray[1].ToString());
-                xDataAdditional.Add(item.ItemArray[2].ToString());
-                yDataAdditional.Add(item.ItemArray[3].ToString());
+                if (item.ItemArray.Length >= 1)
+                    xData.Add(item.ItemArray[0].ToString());
+                if (item.ItemArray.Length >= 2)
+                    yData.Add(item.ItemArray[1].ToString());
+                if (item.ItemArray.Length >= 3)
+                    xDataAdditional.Add(item.ItemArray[2].ToString());
+                if (item.ItemArray.Length >= 4)
+                    yDataAdditional.Add(item.ItemArray[3].ToString());
             }
 
             GraphModel model = new GraphModel();
@@ -57,14 +72,14 @@ namespace StoreGraphRenderer.Controllers
             model.XAxisData = yData.ToArray();
 
             model.YAxisDataAdditional = xDataAdditional.ToArray();
-            
-            model.XAxisTitle = "Week counter";
-            model.YAxisTitle = "Total Sales";
-            model.Title = "Total Sales/Week counter";
-            model.GraphType = "line";
+
+            model.XAxisTitle = modelXAxisTitle;
+            model.YAxisTitle = modelYAxisTitle;
+            model.Title = modelTitle;
+            model.GraphType = modelGraphType;
             model.GraphTemplate = GraphTemplate.graphTemplateInterval1000WithX50;
-            model.SeriesTitleInitial = "Weeks 13";
-            model.SeriesTitleAdditional = "Weeks 52";
+            model.SeriesTitleInitial = modelSeriesTitle;
+            model.SeriesTitleAdditional = modelSeriesAdditionalTitle;
             var chart = GraphRenderer.RenderGraph(model);
 
             string imageData = ImageToBase64.Get(chart);
@@ -74,149 +89,115 @@ namespace StoreGraphRenderer.Controllers
             }
 
             return View("~/Views/Graph/RenderGraph.cshtml");
+        }
+
+        // GET: Graph Total Sales - line 
+        public ActionResult GetTotalSales(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
+        {
+            return DisplayGraph(
+                StoreSelectedID, 
+                ClusterGroupSelected, 
+                ClusterNameSelected, 
+                StoreSelectedFloor, 
+                StoredProcedures.Procedure.sp_GetTotalSales,
+                modelTitle: "Total Sales/Week counter",
+                modelGraphType:"line",
+                modelXAxisTitle:"Week counter",
+                modelYAxisTitle:"Total Sales",
+                modelSeriesTitle:"Weeks 13",
+                modelSeriesAdditionalTitle:"Weeks 52"
+                );
         }
 
         // GET: Graph Total Volume - line
         public ActionResult GetTotalVolume(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
         {
-            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetTotalVolume,
-                                       new Dictionary<string, string>()
-                                       {
-                                           { "@StoreID", StoreSelectedID.ToString() },
-                                           { "@ClusterID", GetClusterID(ClusterNameSelected).ToString() },
-                                           { "@FloorName", StoreSelectedFloor }
-                                       });
-
-            List<string> xData = new List<string>();
-            List<string> yData = new List<string>();
-
-            List<string> xDataAdditional = new List<string>();
-            List<string> yDataAdditional = new List<string>();
-
-            foreach (DataRow item in table.Rows)
-            {
-                xData.Add(item.ItemArray[0].ToString());
-                yData.Add(item.ItemArray[1].ToString());
-                xDataAdditional.Add(item.ItemArray[2].ToString());
-                yDataAdditional.Add(item.ItemArray[3].ToString());
-            }
-
-            GraphModel model = new GraphModel();
-            model.YAxisData = xData.ToArray();
-            model.XAxisData = yData.ToArray();
-
-            model.YAxisDataAdditional = xDataAdditional.ToArray();
-
-            model.XAxisTitle = "Week counter";
-            model.YAxisTitle = "Total Volume";
-            model.Title = "Total Volume/Week counter";
-            model.GraphType = "line";
-            model.GraphTemplate = GraphTemplate.graphTemplateInterval1000WithX50;
-            model.SeriesTitleInitial = "Weeks 13";
-            model.SeriesTitleAdditional = "Weeks 52";
-            var chart = GraphRenderer.RenderGraph(model);
-
-            string imageData = ImageToBase64.Get(chart);
-            if (imageData.Length > 0)
-            {
-                ViewBag.ImageUrl = imageData;
-            }
-
-            return View("~/Views/Graph/RenderGraph.cshtml");
+            return DisplayGraph(
+                StoreSelectedID,
+                ClusterGroupSelected,
+                ClusterNameSelected,
+                StoreSelectedFloor,
+                StoredProcedures.Procedure.sp_GetTotalVolume,
+                modelTitle: "Total Volunme/Week counter",
+                modelGraphType: "line",
+                modelXAxisTitle: "Week counter",
+                modelYAxisTitle: "Total Volume",
+                modelSeriesTitle: "Weeks 13",
+                modelSeriesAdditionalTitle: "Weeks 52"
+                );
         }
 
         // GET: Graph Total Volume - line
         public ActionResult GetAverageProfit(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
         {
-            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetAverageProfit,
-                                       new Dictionary<string, string>()
-                                       {
-                                           { "@StoreID", StoreSelectedID.ToString() },
-                                           { "@ClusterID", GetClusterID(ClusterNameSelected).ToString() },
-                                           { "@FloorName", StoreSelectedFloor }
-                                       });
-
-            List<string> xData = new List<string>();
-            List<string> yData = new List<string>();
-
-            List<string> xDataAdditional = new List<string>();
-            List<string> yDataAdditional = new List<string>();
-
-            foreach (DataRow item in table.Rows)
-            {
-                xData.Add(item.ItemArray[0].ToString());
-                yData.Add(item.ItemArray[1].ToString());
-                xDataAdditional.Add(item.ItemArray[2].ToString());
-                yDataAdditional.Add(item.ItemArray[3].ToString());
-            }
-
-            GraphModel model = new GraphModel();
-            model.YAxisData = xData.ToArray();
-            model.XAxisData = yData.ToArray();
-
-            model.YAxisDataAdditional = xDataAdditional.ToArray();
-
-            model.XAxisTitle = "Week counter";
-            model.YAxisTitle = "Average Profit";
-            model.Title = "Average profit";
-            model.GraphType = "line";
-            model.GraphTemplate = GraphTemplate.graphTemplateInterval1000WithX50;
-            model.SeriesTitleInitial = "Weeks 13";
-            model.SeriesTitleAdditional = "Weeks 52";
-            var chart = GraphRenderer.RenderGraph(model);
-
-            string imageData = ImageToBase64.Get(chart);
-            if (imageData.Length > 0)
-            {
-                ViewBag.ImageUrl = imageData;
-            }
-
-            return View("~/Views/Graph/RenderGraph.cshtml");
+            return DisplayGraph(
+               StoreSelectedID,
+               ClusterGroupSelected,
+               ClusterNameSelected,
+               StoreSelectedFloor,
+               StoredProcedures.Procedure.sp_GetAverageProfit,
+               modelTitle: "Average Profit/Week counter",
+               modelGraphType: "line",
+               modelXAxisTitle: "Week counter",
+               modelYAxisTitle: "Average Profits",
+               modelSeriesTitle: "Weeks 13",
+               modelSeriesAdditionalTitle: "Weeks 52"
+               );
         }
 
         // GET: Graph Average Profit Per Bay - column
         public ActionResult GetAverageProfitPerBay(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
         {
-            DataTable table = StoredProcedureHandler.Get(StoredProcedures.Procedure.sp_GetAverageProfitPerBay,
-                                       new Dictionary<string, string>()
-                                       {
-                                           { "@StoreID", StoreSelectedID.ToString() },
-                                           { "@ClusterID", GetClusterID(ClusterNameSelected).ToString() },
-                                           { "@FloorName", StoreSelectedFloor }
-                                       });
-
-            List<string> xData = new List<string>(); // bay
-            List<string> yData = new List<string>(); // profit weeks 13
-            List<string> yDataAdditional = new List<string>(); // profit weeks 52
-            
-            foreach (DataRow item in table.Rows)
-            {
-                xData.Add(item.ItemArray[0].ToString());
-                yData.Add(item.ItemArray[1].ToString());
-                yDataAdditional.Add(item.ItemArray[2].ToString());
-            }
-
-            GraphModel model = new GraphModel();
-            model.YAxisData = yData.ToArray();
-            model.YAxisDataAdditional = yDataAdditional.ToArray();
-            model.XAxisData = xData.ToArray();
-           
-            model.XAxisTitle = "";
-            model.YAxisTitle = "";
-            model.Title = "";
-            model.GraphTemplate = GraphTemplate.graphTemplateInterval1000WithX50;
-            model.SeriesTitleInitial = "Weeks 13";
-            var chart = GraphRenderer.RenderGraph(model);
-
-            string imageData = ImageToBase64.Get(chart);
-            if (imageData.Length > 0)
-            {
-                ViewBag.ImageUrl = imageData;
-            }
-
-            return View("~/Views/Graph/RenderGraph.cshtml");
+            return DisplayGraph(
+               StoreSelectedID,
+               ClusterGroupSelected,
+               ClusterNameSelected,
+               StoreSelectedFloor,
+               StoredProcedures.Procedure.sp_GetAverageProfitPerBay,
+               modelTitle: "",
+               modelGraphType: "column",
+               modelXAxisTitle: "",
+               modelYAxisTitle: "",
+               modelSeriesTitle: "Weeks 13",
+               modelSeriesAdditionalTitle: "Weeks 52"
+               );
         }
 
+        // GET: Graph Total Sales Per Bay - column
+        public ActionResult GetTotalSalesPerBay(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
+        {
+            return DisplayGraph(
+               StoreSelectedID,
+               ClusterGroupSelected,
+               ClusterNameSelected,
+               StoreSelectedFloor,
+               StoredProcedures.Procedure.sp_GetTotalSalesPerBay,
+               modelTitle: "",
+               modelGraphType: "column",
+               modelXAxisTitle: "",
+               modelYAxisTitle: "",
+               modelSeriesTitle: "Weeks 13",
+               modelSeriesAdditionalTitle: "Weeks 52"
+               );
+        }
+
+        // GET: Graph Total Volume Per Bay - column
+        public ActionResult GetTotalVolumePerBay(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor)
+        {
+            return DisplayGraph(
+               StoreSelectedID,
+               ClusterGroupSelected,
+               ClusterNameSelected,
+               StoreSelectedFloor,
+               StoredProcedures.Procedure.sp_GetTotalVolumePerBay,
+               modelTitle: "",
+               modelGraphType: "column",
+               modelXAxisTitle: "",
+               modelYAxisTitle: "",
+               modelSeriesTitle: "Weeks 13",
+               modelSeriesAdditionalTitle: "Weeks 52"
+               );
+        }
 
         // GET: Graph Bay Sales - line
         public ActionResult GetBaySales(int StoreSelectedID, string ClusterGroupSelected, string ClusterNameSelected, string StoreSelectedFloor, string SelectedBay)
