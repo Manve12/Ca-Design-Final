@@ -170,6 +170,7 @@
     <Compile Include="Models\ClusterSelection.cs" />
     <Compile Include="Models\GraphModel.cs" />
     <Compile Include="Models\StoreSelection.cs" />
+    <Compile Include="Other\ImageToBase64.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

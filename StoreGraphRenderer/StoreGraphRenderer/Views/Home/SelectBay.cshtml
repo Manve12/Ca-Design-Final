@@ -18,6 +18,9 @@
 
 @using (Html.BeginForm("GetBayVolume", "Graph"))
 {
+    <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+    <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
     @Html.HiddenFor(cGroup => cGroup.ClusterGroupSelected);
     @Html.HiddenFor(cName => cName.ClusterNameSelected);
     @Html.HiddenFor(cBay => cBay.SelectedBay);
@@ -25,11 +28,14 @@
     <input type="submit" value="Get Bay Volume" />
 }
 
-@using (Html.BeginForm("GetBayAverageSales", "Graph"))
+@using (Html.BeginForm("GetBayAverageProfit", "Graph"))
 {
+    <input type="hidden" name="StoreSelectedID" value="@ViewBag.StoreSelectedID" />
+    <input type="hidden" name="StoreSelectedFloor" value="@ViewBag.StoreSelectedFloor" />
+
     @Html.HiddenFor(cGroup => cGroup.ClusterGroupSelected);
     @Html.HiddenFor(cName => cName.ClusterNameSelected);
     @Html.HiddenFor(cBay => cBay.SelectedBay);
     
-    <input type="submit" value="Get Bay Average Sales" />
+    <input type="submit" value="Get Bay Average Profit" />
 }
