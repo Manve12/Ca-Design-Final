@@ -63,8 +63,6 @@ namespace StoreGraphRenderer.Controllers
             model.Title = "Total Sales/Week counter";
             model.GraphType = "line";
             model.GraphTemplate = GraphTemplate.graphTemplateInterval1000WithX50;
-            model.Width = 1200;
-            model.Height = 1200;
             model.SeriesTitleInitial = "Weeks 13";
             model.SeriesTitleAdditional = "Weeks 52";
             var chart = GraphRenderer.RenderGraph(model);
@@ -114,8 +112,6 @@ namespace StoreGraphRenderer.Controllers
             model.Title = "Total Volume/Week counter";
             model.GraphType = "line";
             model.GraphTemplate = GraphTemplate.graphTemplateInterval1000WithX50;
-            model.Width = 1200;
-            model.Height = 1200;
             model.SeriesTitleInitial = "Weeks 13";
             model.SeriesTitleAdditional = "Weeks 52";
             var chart = GraphRenderer.RenderGraph(model);
@@ -165,8 +161,6 @@ namespace StoreGraphRenderer.Controllers
             model.Title = "Average profit";
             model.GraphType = "line";
             model.GraphTemplate = GraphTemplate.graphTemplateInterval1000WithX50;
-            model.Width = 1200;
-            model.Height = 1200;
             model.SeriesTitleInitial = "Weeks 13";
             model.SeriesTitleAdditional = "Weeks 52";
             var chart = GraphRenderer.RenderGraph(model);

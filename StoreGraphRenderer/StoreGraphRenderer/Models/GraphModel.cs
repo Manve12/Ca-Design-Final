@@ -7,8 +7,8 @@ namespace StoreGraphRenderer.Models
 {
     public class GraphModel
     {
-        public int Width { get; set; } = 600;
-        public int Height { get; set; } = 400;
+        public int Width { get; set; } = 1200;
+        public int Height { get; set; } = 1200;
 
         public string Title { get; set; }
 
@@ -27,8 +27,5 @@ namespace StoreGraphRenderer.Models
 
         public string XAxisTitle { get; set; }
         public string YAxisTitle { get; set; }
-
-        public int GraphIntervalX { get; set; } = 600;
-        public int GraphIntervalY { get; set; } = 400;
     }
 }
