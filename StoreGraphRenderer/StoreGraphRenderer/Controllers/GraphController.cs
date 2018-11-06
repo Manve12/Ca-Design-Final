@@ -161,8 +161,8 @@ namespace StoreGraphRenderer.Controllers
             model.YAxisDataAdditional = xDataAdditional.ToArray();
 
             model.XAxisTitle = "Week counter";
-            model.YAxisTitle = "Total Volume";
-            model.Title = "Total Volume/Week counter";
+            model.YAxisTitle = "Average Profit";
+            model.Title = "Average profit";
             model.GraphType = "line";
             model.GraphTemplate = GraphTemplate.graphTemplateInterval1000WithX50;
             model.Width = 1200;
