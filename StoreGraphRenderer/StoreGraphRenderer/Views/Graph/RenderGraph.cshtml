@@ -3,5 +3,11 @@
     ViewBag.Title = "RenderGraph";
 }
 
-<img src="@ViewBag.ImageUrl" />
-<img src="@ViewBag.ImageUrlWeeks52" />
+<p class="title">Graph with relative information</p>
+
+<img src="@ViewBag.ImageUrl" style="width:98%;margin:auto" />
+
+@using (Html.BeginForm("Index", "Home"))
+{
+    <input type="submit" value="Home"/>
+}
